@@ -1,0 +1,166 @@
+<?php
+/**
+ * @file
+ * Returns the HTML for a single Drupal page.
+ *
+ * Complete documentation for this file is available online.
+ * @see https://drupal.org/node/1728148
+ */
+?>
+
+<?php
+//  drupal_add_library('popcornjs', 'popcornjs');
+  drupal_add_js(drupal_get_path('theme', 'quipu_theme_1') . '/js/popcorn.min.js');
+  drupal_add_js(drupal_get_path('theme', 'quipu_theme_1') . '/js/subtitle.js');
+
+?>
+
+<div id="page">
+
+  <header class="header" id="header" role="banner">
+    <div id="header-content">
+      <div id="navigation">
+
+        <?php if ($main_menu): ?>
+          <nav id="main-menu" role="navigation" tabindex="-1">
+            <?php
+            // This code snippet is hard to modify. We recommend turning off the
+            // "Main menu" on your sub-theme's settings form, deleting this PHP
+            // code block, and, instead, using the "Menu block" module.
+            // @see https://drupal.org/project/menu_block
+            print theme('links__system_main_menu', array(
+              'links' => $main_menu,
+              'attributes' => array(
+                'class' => array('links', 'inline', 'clearfix'),
+              ),
+              'heading' => array(
+                'text' => t('Main menu'),
+                'level' => 'h2',
+                'class' => array('element-invisible'),
+              ),
+            )); ?>
+          </nav>
+        <?php endif; ?>
+
+        <?php print render($page['navigation']); ?>
+
+      </div>
+
+      <?php if ($logo): ?>
+        <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
+      <?php endif; ?>
+
+      <?php if ($site_name || $site_slogan): ?>
+        <div class="header__name-and-slogan" id="name-and-slogan">
+          <?php if ($site_name): ?>
+            <h1 class="header__site-name" id="site-name">
+              <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" class="header__site-link" rel="home"><span><?php print $site_name; ?></span></a>
+            </h1>
+          <?php endif; ?>
+
+          <?php if ($site_slogan): ?>
+            <div class="header__site-slogan" id="site-slogan"><?php print $site_slogan; ?></div>
+          <?php endif; ?>
+        </div>
+      <?php endif; ?>
+
+      <?php if ($secondary_menu): ?>
+        <nav class="header__secondary-menu" id="secondary-menu" role="navigation">
+          <?php print theme('links__system_secondary_menu', array(
+            'links' => $secondary_menu,
+            'attributes' => array(
+              'class' => array('links', 'inline', 'clearfix'),
+            ),
+            'heading' => array(
+              'text' => $secondary_menu_heading,
+              'level' => 'h2',
+              'class' => array('element-invisible'),
+            ),
+          )); ?>
+        </nav>
+      <?php endif; ?>
+
+      <?php print render($page['header']); ?>
+    </div>
+  </header>
+  <div id="sub-header">
+    <div id="subheader-content">
+      <div class="subheader-btn" id="tutorial-btn"></div><a href="?q=node/add/audio-feedback"><div class="subheader-btn" id="record-btn"></div></a>
+      <?php $filters = module_invoke('views', 'block_view', '-exp-public_archive-page'); ?>
+      <div id="filters">
+        <div id="filter-btns"><?php print render($filters['content']); ?></div>
+        <div id="filter-heading">Filter:</div>
+      </div>
+    </div>
+  </div>
+  <div id="main">
+
+    <div id="content" class="column" role="main">
+      
+      <?php print render($page['highlighted']); ?>
+      <a id="main-content"></a>
+      <?php print $messages; ?>
+      <?php print render($tabs); ?>
+      <?php print render($page['help']); ?>
+      <?php if ($action_links): ?>
+        <ul class="action-links"><?php print render($action_links); ?></ul>
+      <?php endif; ?>
+      <?php print render($page['content']); ?>
+      <?php print $feed_icons; ?>
+    </div>
+
+
+    <?php
+      // Render the sidebars to see if there's anything in them.
+      $sidebar_first  = render($page['sidebar_first']);
+      $sidebar_second = render($page['sidebar_second']);
+    ?>
+
+    <?php if ($sidebar_first || $sidebar_second): ?>
+      <aside class="sidebars">
+        <?php print $sidebar_first; ?>
+        <?php print $sidebar_second; ?>
+      </aside>
+    <?php endif; ?>
+
+  </div>
+
+  <?php print render($page['footer']); ?>
+
+</div>
+
+<div id="audio-player-wrapper">
+  <div id="subtitle-container"></div>
+  <div id="player-close-btn"></div>
+  <div id="src-icon"></div>
+  <canvas id="player-sound-vis" width="740" height="306"></canvas>
+  <div id="progress-bar"><div id="progress"></div></div>
+  <div id="player-controls-wrap">
+    <div id="play-pause-btn" class="player-controls"></div>
+    <div id="volume-btn" class="player-controls"></div>
+    <div id="lang-select" class="player-controls"></div>
+    <div id="player-info-wrap" class="player-controls">
+      <div id="player-name" class="player-text"></div>
+      <div id="player-date" class="player-text"></div>
+      <div id="player-time" class="player-text"></div>
+    </div>
+    <div id="player-next-thread" class="player-controls">>>Next Story: Herbalinda Quinde Garcia</div>
+  </div>
+  <div id="volume-container"><input type="range" id="volume" min="0" max="100" step="1" value="1"/></div>
+  <div id="lang-container"><div id="es-button" class="lang-button">Espanol</div><div id="en-button" class="lang-button">English</div></div>
+</div>
+
+<div id="welcome-pop-up">
+  <div id="welcome-header">Welcome to the Quipu Project!<div id="welcome-close-btn"></div></div>
+  <div id="welcome-content"><p>The Quipu Project is a <a class="text-highlight">telephone line</a> and a <a class="text-highlight">website</a> recording oral testimonies from Peruvian women and men who were <a class="text-highlight">sterilised</a> as a result of a <a class="text-highlight">Government policy</a> in the late 1990s.  Overwhelmingly from poor or indigenous communities, many were forced, coerced, or not given enough information to <a class="text-highlight">decide</a> whether they wanted to be sterilised.</p>
+<p>The Quipu Project is an emerging story about a <a class="text-highlight">quest for justice,</a> against the odds.  The quest is not over yet.  By listening to the testimonies and recording a message, <a class="text-highlight">you can help</a> to shape what happens next.</p>
+    <div id="video-btn" class="arrow-btn-left">Watch the intro</div><div id="tour-btn" class="arrow-btn-right">Start listening</div>
+  </div>
+</div>
+
+<div id="video-wrapper">
+  <div id="video-close-btn">Close[x]</div>
+  <iframe src="//player.vimeo.com/video/98340425?title=0&amp;byline=0&amp;portrait=0" width="670" height="380"frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+</div>
+
+<?php print render($page['bottom']); ?>
