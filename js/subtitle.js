@@ -101,11 +101,19 @@ Drupal.behaviors.my_custom_behavior = {
 
 	var playing = false;
 	$(document).ready(function() {
+	    
 	    try {
 		audioContext = new AudioContext();
 	    } catch(e) {
 		alert('Web Audio API is not supported in this browser');
 	    }
+	    if (window.location.hash == "#single") {
+		$("#welcome-pop-up").css("display","none");
+		$("#player-close-btn").css("display","none");
+		story_id = "#"+$("body").find("article").attr("id");
+		
+		load_player(story_id);
+	    };
 	});
 //    alert(Drupal.settings.person77.key5.sub_text)    
 	function play() {
@@ -191,8 +199,13 @@ Drupal.behaviors.my_custom_behavior = {
 	});
 
 	$(".node-audio-story, .node-audio-feedback").click(function() {
+	    story_id = '#' + $(this).attr("id");
+	    load_player(story_id);
+	});
+
+	function load_player(story_id) {
 	    $(".node-audio-story, .node-audio-feedback").css("opacity", "0.2");
-	    nid = $(this).find(".play_button").attr('data-nid');
+	    nid = $(story_id).find(".play_button").attr('data-nid');
 	    id = 'audio-' + nid;
 	    audio_player = Popcorn("#"+id);
 	    
@@ -206,21 +219,21 @@ Drupal.behaviors.my_custom_behavior = {
 		}
 	    }
 	    play_pause();
-	    if($(this).hasClass("node-audio-story")==true) {
+	    if($(story_id).hasClass("node-audio-story")==true) {
 		$("#src-icon").css("background","url('../sites/all/themes/quipu_theme_1/images/icons/phone_icon_player.png')");
-	    } else if($(this).hasClass("node-audio-feedback")==true) {
+	    } else if($(story_id).hasClass("node-audio-feedback")==true) {
 		$("#src-icon").css("background","url('../sites/all/themes/quipu_theme_1/images/icons/internet_icon_player.png')");
 	    }
-	    $("#player-name").text($(this).find(".audio_story_title_wrap .field-item.even").text());
-	    $("#player-time").text($(this).find(".audio_story_time").text());
-	    $("#player-date").text($(this).find(".audio_story_date").text());
-	    $("#player-length").text($(this).find(".audio_story_length").text());
-	    if ($(this).find(".node-header-bar").hasClass("audience")) {
+	    $("#player-name").text($(story_id).find(".audio_story_title_wrap .field-item.even").text());
+	    $("#player-time").text($(story_id).find(".audio_story_time").text());
+	    $("#player-date").text($(story_id).find(".audio_story_date").text());
+	    $("#player-length").text($(story_id).find(".audio_story_length").text());
+	    if ($(story_id).find(".node-header-bar").hasClass("audience")) {
 		$("#player-header-bar").css("background-color","rgb(160,201,217)");
 		$("#player-sound-vis").css("background-color","rgba(160,201,217,0.5)");
 		$("#player-name").css("color","rgb(160,201,217)");
 		$("#player-length").css("color","rgb(160,201,217)");
-	    } else if ($(this).find(".node-header-bar").hasClass("contributor")) {
+	    } else if ($(story_id).find(".node-header-bar").hasClass("contributor")) {
 		$("#player-header-bar").css("background-color","rgb(81,166,135)");
 		$("#player-sound-vis").css("background-color","rgba(81,166,135,0.5)");
 		$("#player-name").css("color","rgb(81,166,135)");
@@ -229,9 +242,8 @@ Drupal.behaviors.my_custom_behavior = {
 	    $("#audio-player-wrapper").css("opacity","1");
 	    $("#audio-player-wrapper").css("pointer-events","auto");
 //	    audioUrl = "http://"+$(this).find(".story_player source").attr("src").substr(11);
-
 	    
-	});
+	};
 
 	var current_role = '';
 

@@ -12,7 +12,7 @@
 //  drupal_add_library('popcornjs', 'popcornjs');
   drupal_add_js(drupal_get_path('theme', 'quipu_theme_1') . '/js/popcorn.min.js');
   drupal_add_js(drupal_get_path('theme', 'quipu_theme_1') . '/js/subtitle.js');
-
+  drupal_add_css(drupal_get_path('theme', 'quipu_theme_1') . 'css/player.css', array('group' => CSS_THEME, 'type' => 'file'));
 ?>
 
 <div id="page">
