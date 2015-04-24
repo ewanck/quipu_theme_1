@@ -45,10 +45,10 @@
 //  dsm($content);
       
 ?>
-<?php if ($status == 1 && $node->field_narrative_role['und'][0]['tid']==63): ?>
+<?php if ($status == 1 && $node->field_narrative_role['und'][0]['tid']==42): ?>
 <article id="node-<?php print $node->nid; ?>" class="node-<?php print $node->nid; ?> <?php print $classes; ?> contributor clearfix"<?php print $attributes; ?>>
 <?php endif; ?>
-<?php if ($status == 1 && $node->field_narrative_role['und'][0]['tid']==62): ?>
+<?php if ($status == 1 && $node->field_narrative_role['und'][0]['tid']==44): ?>
 <article id="node-<?php print $node->nid; ?>" class="node-<?php print $node->nid; ?> <?php print $classes; ?> audience clearfix"<?php print $attributes; ?>>
 <?php endif; ?>
 <?php if ($status == 0): ?>
