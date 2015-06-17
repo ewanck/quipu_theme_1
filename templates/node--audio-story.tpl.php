@@ -56,7 +56,9 @@
 <?php endif; ?>
   <?php if ($title_prefix || $title_suffix || $display_submitted || $unpublished || !$page && $title): ?>
     <header>
-      <div class="play_button icon-phone" data-nid="<?php print $node->nid; ?>"></div>
+      <?php if($teaser): ?>
+        <div class="play_button icon-phone" data-nid="<?php print $node->nid; ?>"></div>
+      <?php endif; ?>
       <div class="audio_story_title_wrap">
         <?php print render($title_prefix); ?>
       	<?php if (!$page && $title): ?>
@@ -67,16 +69,18 @@
       	<?php endif; ?>
       	<?php print render($title_suffix); ?>
       </div>
-      <div class="audio_story_length">
-        <?php
-	  $mins = intval(intval($node->field_length['und'][0]['value'])/60);
-	  $secs = intval(intval($node->field_length['und'][0]['value'])%60);
-	  if (strlen($secs)<2) {
-	    $secs = "0".strval($secs);
-	  };
-	  print strval($mins).":".strval($secs);
-	?>
-      </div>
+      <?php if($teaser): ?>
+        <div class="audio_story_length">
+          <?php
+	    $mins = intval(intval($node->field_length['und'][0]['value'])/60);
+	    $secs = intval(intval($node->field_length['und'][0]['value'])%60);
+	    if (strlen($secs)<2) {
+	      $secs = "0".strval($secs);
+	    };
+	    print strval($mins).":".strval($secs);
+	  ?>
+        </div>
+      <?php endif; ?>
       <div class="audio_story_time">
         <?php print render(date("g:i,a", $node->created)); ?>
       </div>

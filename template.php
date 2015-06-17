@@ -26,6 +26,11 @@ function quipu_theme_1_preprocess_page(&$variables, $hook) {
   // quipu_theme_1_preprocess_html($variables, $hook);
   // quipu_theme_1_preprocess_page($variables, $hook);
 
+  if (isset($variables['node']->type)) {
+    $nodetype = $variables['node']->type;
+    $variables['theme_hook_suggestions'][] = 'page__' . $nodetype;
+  }
+
 //  drupal_add_js(array('subtitles' => array('key' => 'value', 'key2' => 'value2', 'key3' => 'value3')), 'setting');
 }
 
