@@ -575,14 +575,16 @@ article table {
     line-height:0.8em;
 }
 
-#audio-player-wrapper {
+#audio-player-wrapper.individual {
     opacity:1;
     position:relative;
-    float:right;
+    margin-left:0px;
     left:0px;
     top:0px;
     width:600px;
     overflow:hidden;
+    pointer-events:auto;
+    height:auto;
 }
 
 #player-header-bar {
