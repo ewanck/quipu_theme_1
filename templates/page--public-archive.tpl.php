@@ -158,6 +158,8 @@
   </div>
 </div>
 
+<a href="http://phoneline.quipu-project.com/moderation-panel"><div id="moderation-panel-button"></div></a>
+
 <div id="video-wrapper">
   <div id="video-close-btn">Close[x]</div>
   <iframe src="//player.vimeo.com/video/98340425?title=0&amp;byline=0&amp;portrait=0" width="670" height="380"frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>

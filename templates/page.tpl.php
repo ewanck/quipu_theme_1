@@ -13,7 +13,6 @@
   <header class="header" id="header" role="banner">
     <div id="header-content">
       <div id="navigation">
-
         <?php if ($main_menu): ?>
           <nav id="main-menu" role="navigation" tabindex="-1">
             <?php

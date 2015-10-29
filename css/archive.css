@@ -189,6 +189,15 @@ a.text-highlight {
     pointer:cursor;
 }
 
+#moderation-panel-button {
+    width:75px;
+    height:75px;
+    position:fixed;
+    bottom:15px;
+    left:15px;
+    background:url('../images/settings-icon2.png');
+}
+
 .form-submit {
     width:138px;
     height:48px;

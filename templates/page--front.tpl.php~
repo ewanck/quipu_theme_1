@@ -9,7 +9,7 @@
 ?>
 
 <div id="page">
-
+  <?php drupal_add_css(path_to_theme().'/css/login.css'); ?>
   <header class="header" id="header" role="banner">
     <div id="header-content">
       <div id="navigation">
