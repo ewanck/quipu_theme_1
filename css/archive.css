@@ -195,7 +195,10 @@ a.text-highlight {
     position:fixed;
     bottom:15px;
     left:15px;
-    background:url('../images/settings-icon2.png');
+}
+
+#moderation-panel-button:hover {
+    background-image:url('../images/settings-icon2.png');
 }
 
 .form-submit {
